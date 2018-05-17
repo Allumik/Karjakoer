@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mäng extends Application {
-    boolean võit = false;
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +22,7 @@ public class Mäng extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         int lammasteKogus = loeLammasteKogus();
-        double algusHetk = System.currentTimeMillis() / 1000;
+        long algusHetk = (System.currentTimeMillis() / 1000);
 
         Group juur = new Group();
 
@@ -106,7 +105,11 @@ public class Mäng extends Application {
                 }
 
                 if (lambadRuudus == lammasteKogus) {
-                    setVõit(true);
+                    try { // ei ole õrna aimugi kuidas õige lahendus sellele erindile välja nägema peaks.
+                        logi("Mängu kestus : " + ((System.currentTimeMillis() / 1000) - algusHetk) + " Raskusel : " + lammasteKogus);
+                    } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     primaryStage.close();
                 }
 
@@ -126,10 +129,6 @@ public class Mäng extends Application {
 
         primaryStage.show();
 
-        if (võit) {
-            logi("Mängu kestus : " + (System.currentTimeMillis() / 1000 - algusHetk));
-        }
-
     }
 
     private static void logi(String sõnum) throws FileNotFoundException, UnsupportedEncodingException {
@@ -147,7 +146,4 @@ public class Mäng extends Application {
         return lammasteKogus;
     }
 
-    public void setVõit(boolean võit) {
-        this.võit = võit;
-    }
 }
