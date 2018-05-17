@@ -20,6 +20,8 @@ public class Sprite {
         this.asukohtY = asukohtY;
         this.laius = laius;
         this.kõrgus = kõrgus;
+        this.sihtX = asukohtX;
+        this.sihtY = asukohtY;
     }
 
     public double getAsukohtX() {
@@ -70,7 +72,7 @@ public class Sprite {
     public void update(double aeg) {
         asukohtX += kiirusX * aeg;
         asukohtY += kiirusY * aeg;
-        if (Math.abs(asukohtX - sihtX + laius / 2) < kiirus / 50 && Math.abs(asukohtY - sihtY + kõrgus / 2) < kiirus / 50) {
+        if (Math.abs(asukohtX - sihtX + laius / 2) < kiirus / 30 && Math.abs(asukohtY - sihtY + kõrgus / 2) < kiirus / 30) {
             setKiirusX(0);
             setKiirusY(0);
         }

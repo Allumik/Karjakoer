@@ -5,9 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,11 @@ public class Mäng extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        int lammasteKogus = loeLammasteKogus();
+        double algusHetk = System.currentTimeMillis() / 1000;
+        final boolean[] võit = {false};
+
         Group juur = new Group();
 
         Canvas lõuend = new Canvas(500, 500);
@@ -31,10 +37,10 @@ public class Mäng extends Application {
 
         List<Sprite> lambad = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < lammasteKogus; i++) {
             while (true) {
                 try {
-                    Lammas lammas = new Lammas(Math.random() * 500, Math.random() * 500, 20, 20);
+                    Lammas lammas = new Lammas(Math.random() * 480, Math.random() * 480, 20, 20);
                     for (Sprite loom : loomad) {
                         if (loom.intersects(lammas)) {
                             throw new LoomEeesErind("");
@@ -58,6 +64,12 @@ public class Mäng extends Application {
             karjakoer.liigu(event.getX(), event.getY(), 200);
         });
 
+        steen.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.SPACE)) {
+                System.out.println("auh");
+            }
+        });
+
         primaryStage.setScene(steen);
 
         new AnimationTimer() {
@@ -72,6 +84,24 @@ public class Mäng extends Application {
 
                 gc.setFill(Color.YELLOWGREEN);
                 gc.fillRect(150, 50, 200, 100);
+
+                int lambadRuudus = 0;
+                for (Sprite lammas : lambad) {
+                    if (lammas.getKiirusX() == 0 && lammas.getKiirusY() == 0) {
+                        lammas.liigu(lammas.getAsukohtX() - 75 + Math.random() * 150, lammas.getAsukohtY() - 75 + Math.random() * 150, 2 + Math.random() * 10);
+                    }
+                    if (150 < lammas.getAsukohtX()
+                            && lammas.getAsukohtX() < 350
+                            && 50 < lammas.getAsukohtY()
+                            && lammas.getAsukohtY() < 150) {
+                        lambadRuudus += 1;
+                    }
+                }
+
+                if (lambadRuudus == lammasteKogus) {
+                    this.stop();
+                    võit[0] = true;
+                }
 
                 for (Sprite loom : loomad) {
                     if (0 > loom.getSihtX()
@@ -89,7 +119,24 @@ public class Mäng extends Application {
 
         primaryStage.show();
 
+        if (võit[0]) {
+            logi("Mängu kestus : " + (System.currentTimeMillis() / 1000 - algusHetk));
+        }
+
     }
 
+    private static void logi(String sõnum) throws FileNotFoundException, UnsupportedEncodingException {
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("WinLog.txt", true), "UTF-8")))) {
+            out.println(sõnum);
+        }
+    }
 
+    private static int loeLammasteKogus() throws IOException {
+        int lammasteKogus;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("Config.txt"), "UTF-8"))) {
+            br.readLine();
+            lammasteKogus = Integer.parseInt(br.readLine());
+        }
+        return lammasteKogus;
+    }
 }
