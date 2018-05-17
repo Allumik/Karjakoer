@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -60,6 +61,7 @@ public class Mäng extends Application {
         Scene steen = new Scene(juur, 500, 500);
 
         steen.setOnMouseMoved(event -> {
+            steen.setCursor(Cursor.NONE);
             karjakoer.liigu(event.getX(), event.getY(), 200);
         });
 
