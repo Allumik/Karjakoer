@@ -1,7 +1,9 @@
-import javafx.scene.image.Image;
+package application;
+
 
 public class Lammas extends Sprite {
+	private double kiirusX = super.getKiirusX();
     public Lammas(double asukohtX, double asukohtY, double laius, double kõrgus) {
-        super(new Image("lammas.png"), asukohtX, asukohtY, laius, kõrgus);
+        super("Lammas", asukohtX, asukohtY, laius, kõrgus);
     }
 }

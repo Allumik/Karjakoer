@@ -1,9 +1,11 @@
+package application;
+
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Sprite {
-    private Image image;
+    private String image;
     private double asukohtX;
     private double asukohtY;
     private double kiirusX;
@@ -14,7 +16,7 @@ public class Sprite {
     private double laius;
     private double kõrgus;
 
-    public Sprite(Image image, double asukohtX, double asukohtY, double laius, double kõrgus) {
+    public Sprite(String image, double asukohtX, double asukohtY, double laius, double kõrgus) {
         this.image = image;
         this.asukohtX = asukohtX;
         this.asukohtY = asukohtY;
@@ -90,7 +92,8 @@ public class Sprite {
     }
 
     public void render(GraphicsContext gc) {
-        gc.drawImage(image, asukohtX, asukohtY);
+    	Image imagen = (getKiirusX() < 0) ? new Image(this.image+".png"):new Image(this.image+"right.png");
+        gc.drawImage(imagen, asukohtX, asukohtY);
     }
 
     public boolean intersects(Sprite s) {
