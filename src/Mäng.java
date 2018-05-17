@@ -54,6 +54,17 @@ public class Mäng extends Application {
 
         Scene steen = new Scene(juur, 500, 500);
 
+        steen.setOnMouseClicked(event -> {
+            double vahemaaX = event.getX() - karjakoer.getAsukohtX() - 10;
+            double vahemaaY = event.getY() - karjakoer.getAsukohtY() - 10;
+            double vahemaaFaktor = Math.sqrt(vahemaaX * vahemaaX + vahemaaY * vahemaaY);
+            karjakoer.setKiirusX(vahemaaX / vahemaaFaktor * 50);
+            karjakoer.setKiirusY(vahemaaY / vahemaaFaktor * 50);
+            System.out.println(vahemaaFaktor);
+            System.out.println(event.getX());
+            System.out.println(event.getY());
+        });
+
         primaryStage.setScene(steen);
 
         new AnimationTimer() {
@@ -66,6 +77,9 @@ public class Mäng extends Application {
                 gc.setFill(Color.GREEN);
                 gc.fillRect(0, 0, 500, 500);
 
+                gc.setFill(Color.YELLOWGREEN);
+                gc.fillRect(150, 50, 200, 100);
+
                 for (Sprite loom : loomad) {
                     loom.update(möödunudAeg);
                     loom.render(gc);
@@ -76,4 +90,6 @@ public class Mäng extends Application {
         primaryStage.show();
 
     }
+
+
 }
