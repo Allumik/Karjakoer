@@ -54,8 +54,8 @@ public class Mäng extends Application {
 
         Scene steen = new Scene(juur, 500, 500);
 
-        steen.setOnMouseClicked(event -> {
-            karjakoer.liigu(event.getX(), event.getY(), 50);
+        steen.setOnMouseMoved(event -> {
+            karjakoer.liigu(event.getX(), event.getY(), 200);
         });
 
         primaryStage.setScene(steen);
@@ -74,6 +74,13 @@ public class Mäng extends Application {
                 gc.fillRect(150, 50, 200, 100);
 
                 for (Sprite loom : loomad) {
+                    if (0 > loom.getSihtX()
+                            || loom.getSihtX() > lõuend.getWidth()
+                            || 0 > loom.getSihtY()
+                            || loom.getSihtY() > lõuend.getHeight()) {
+                        loom.setKiirusX(0);
+                        loom.setKiirusY(0);
+                    }
                     loom.update(möödunudAeg);
                     loom.render(gc);
                 }

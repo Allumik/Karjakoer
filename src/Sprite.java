@@ -10,6 +10,7 @@ public class Sprite {
     private double kiirusY;
     private double sihtX;
     private double sihtY;
+    private double kiirus; // kiirusfaktor, mitte liikumiseks
     private double laius;
     private double kõrgus;
 
@@ -49,8 +50,17 @@ public class Sprite {
         return kiirusY;
     }
 
+    public double getSihtX() {
+        return sihtX;
+    }
+
+    public double getSihtY() {
+        return sihtY;
+    }
+
     public void setKiirusY(double kiirusY) {
         this.kiirusY = kiirusY;
+
     }
 
     public Rectangle2D getPiirid() {
@@ -60,7 +70,7 @@ public class Sprite {
     public void update(double aeg) {
         asukohtX += kiirusX * aeg;
         asukohtY += kiirusY * aeg;
-        if (Math.abs(asukohtX - sihtX + laius / 2) < 2 && Math.abs(asukohtY - sihtY + kõrgus / 2) < 2) {
+        if (Math.abs(asukohtX - sihtX + laius / 2) < kiirus / 50 && Math.abs(asukohtY - sihtY + kõrgus / 2) < kiirus / 50) {
             setKiirusX(0);
             setKiirusY(0);
         }
@@ -74,6 +84,7 @@ public class Sprite {
         this.setKiirusY(vahemaaY / vahemaaFaktor * kiirus);
         this.sihtX = sihtX;
         this.sihtY = sihtY;
+        this.kiirus = kiirus;
     }
 
     public void render(GraphicsContext gc) {
