@@ -109,10 +109,10 @@ public class Mäng extends Application {
                 }
 
                 if (lambadRuudus == lammasteKogus) {
-                    try { // ei ole õrna aimugi kuidas õige lahendus sellele erindile välja nägema peaks.
+                    try {
                         logi("Mängu kestus : " + ((System.currentTimeMillis() / 1000) - algusHetk) + " Raskusel : " + lammasteKogus);
                     } catch (FileNotFoundException | UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
                     primaryStage.close();
                 }

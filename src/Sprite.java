@@ -1,11 +1,10 @@
-package application;
-
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Sprite {
-    private String image;
+    private Image image;
+    private Image imageParem;
     private double asukohtX;
     private double asukohtY;
     private double kiirusX;
@@ -17,7 +16,8 @@ public class Sprite {
     private double kõrgus;
 
     public Sprite(String image, double asukohtX, double asukohtY, double laius, double kõrgus) {
-        this.image = image;
+        this.image = new Image(image + ".png");
+        this.imageParem = new Image(image + "right.png");
         this.asukohtX = asukohtX;
         this.asukohtY = asukohtY;
         this.laius = laius;
@@ -92,7 +92,7 @@ public class Sprite {
     }
 
     public void render(GraphicsContext gc) {
-    	Image imagen = (getKiirusX() < 0) ? new Image(this.image+".png"):new Image(this.image+"right.png");
+        Image imagen = (getKiirusX() < 0) ? image : imageParem;
         gc.drawImage(imagen, asukohtX, asukohtY);
     }
 
