@@ -2,6 +2,7 @@
 School project game of herd management.
 
 Mäng, kus eesmärgiks on karjatada lambad mingi välja sisse, ehk algusväli oleks midagi sellist:
+```
 _____________________________________________________________________________________________
 |                                                                                           |
 |                                                                                           |
@@ -25,7 +26,7 @@ ________________________________________________________________________________
 |                                                                                           |
 |                                                                                           |
 _____________________________________________________________________________________________
-
+```
 Karjakoer on kontrollitav hiirega, ehk niikaua kui registreeritakse hiire liikumist kusagile suunda, siis ka liigub karjakoer.
 
 Lambad peavad kõik jõudma sihtmärki (lihtsam teha ruut). 
@@ -46,4 +47,4 @@ Order of business:
 3. tekitada lammas.java, mis proovib eemalduda karjakoerast, vb ka kui läheduses (15x15 pikslit) on teine lammas, siis proovib temaga samas suunas joosta. Siin ka kasutada funktsiooni Random, mis aegajalt muudab lamba liikumissuunda väikese kraadi võrra.
 4. luua logisüsteem, mis salvestab lõpetamise aja ja lammaste hulga. (võib ka lahendada nii, et võtad mängu alguse (kui vajutatakse "s") ja lahutada maha mängu lõppemise võiduga ja arvutada koos lammaste arvuga viimase skooripunktid).
 5. luua mängu alguse ja lõpuekraan. (mängu algusekraan vb võimaldaks ka sisestada lammaste arvu hulka).
-6. palvetada jumalat, et see ka töötaks.
+6. palvetada jumala poole, et see ka töötaks.
