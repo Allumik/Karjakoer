@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mäng extends Application {
+    boolean võit = false;
 
     public static void main(String[] args) {
         launch(args);
@@ -23,7 +24,6 @@ public class Mäng extends Application {
     public void start(Stage primaryStage) throws IOException {
         int lammasteKogus = loeLammasteKogus();
         double algusHetk = System.currentTimeMillis() / 1000;
-        final boolean[] võit = {false};
 
         Group juur = new Group();
 
@@ -66,7 +66,14 @@ public class Mäng extends Application {
 
         steen.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.SPACE)) {
-                System.out.println("auh");
+                for (Sprite lammas : lambad) {
+                    double vahemaaX = lammas.getAsukohtX() - karjakoer.getAsukohtX();
+                    double vahemaaY = lammas.getAsukohtY() - karjakoer.getAsukohtY();
+                    double kaugus = Math.sqrt(vahemaaX * vahemaaX + vahemaaY * vahemaaY);
+                    if (kaugus < 100) {
+                        lammas.liigu(lammas.getAsukohtX() + ((vahemaaX / kaugus) * 50), lammas.getAsukohtY() + ((vahemaaY / kaugus) * 50), 20);
+                    }
+                }
             }
         });
 
@@ -99,8 +106,8 @@ public class Mäng extends Application {
                 }
 
                 if (lambadRuudus == lammasteKogus) {
-                    this.stop();
-                    võit[0] = true;
+                    setVõit(true);
+                    primaryStage.close();
                 }
 
                 for (Sprite loom : loomad) {
@@ -119,7 +126,7 @@ public class Mäng extends Application {
 
         primaryStage.show();
 
-        if (võit[0]) {
+        if (võit) {
             logi("Mängu kestus : " + (System.currentTimeMillis() / 1000 - algusHetk));
         }
 
@@ -138,5 +145,9 @@ public class Mäng extends Application {
             lammasteKogus = Integer.parseInt(br.readLine());
         }
         return lammasteKogus;
+    }
+
+    public void setVõit(boolean võit) {
+        this.võit = võit;
     }
 }
