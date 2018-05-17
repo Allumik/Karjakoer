@@ -98,10 +98,10 @@ public class Mäng extends Application {
                     if (lammas.getKiirusX() == 0 && lammas.getKiirusY() == 0) {
                         lammas.liigu(lammas.getAsukohtX() - 75 + Math.random() * 150, lammas.getAsukohtY() - 75 + Math.random() * 150, 2 + Math.random() * 10);
                     }
-                    if (150 < lammas.getAsukohtX()
-                            && lammas.getAsukohtX() < 350
-                            && 50 < lammas.getAsukohtY()
-                            && lammas.getAsukohtY() < 150) {
+                    if (150 < lammas.getAsukohtX() + 10
+                            && lammas.getAsukohtX() + 10 < 350
+                            && 50 < lammas.getAsukohtY() + 10
+                            && lammas.getAsukohtY() + 10 < 150) {
                         lambadRuudus += 1;
                     }
                 }
