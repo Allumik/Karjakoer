@@ -55,14 +55,7 @@ public class Mäng extends Application {
         Scene steen = new Scene(juur, 500, 500);
 
         steen.setOnMouseClicked(event -> {
-            double vahemaaX = event.getX() - karjakoer.getAsukohtX() - 10;
-            double vahemaaY = event.getY() - karjakoer.getAsukohtY() - 10;
-            double vahemaaFaktor = Math.sqrt(vahemaaX * vahemaaX + vahemaaY * vahemaaY);
-            karjakoer.setKiirusX(vahemaaX / vahemaaFaktor * 50);
-            karjakoer.setKiirusY(vahemaaY / vahemaaFaktor * 50);
-            System.out.println(vahemaaFaktor);
-            System.out.println(event.getX());
-            System.out.println(event.getY());
+            karjakoer.liigu(event.getX(), event.getY(), 50);
         });
 
         primaryStage.setScene(steen);

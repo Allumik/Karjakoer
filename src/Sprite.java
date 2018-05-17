@@ -8,6 +8,8 @@ public class Sprite {
     private double asukohtY;
     private double kiirusX;
     private double kiirusY;
+    private double sihtX;
+    private double sihtY;
     private double laius;
     private double kõrgus;
 
@@ -58,6 +60,20 @@ public class Sprite {
     public void update(double aeg) {
         asukohtX += kiirusX * aeg;
         asukohtY += kiirusY * aeg;
+        if (Math.abs(asukohtX - sihtX + laius / 2) < 2 && Math.abs(asukohtY - sihtY + kõrgus / 2) < 2) {
+            setKiirusX(0);
+            setKiirusY(0);
+        }
+    }
+
+    public void liigu(double sihtX, double sihtY, double kiirus) {
+        double vahemaaX = sihtX - this.getAsukohtX() - laius / 2;
+        double vahemaaY = sihtY - this.getAsukohtY() - laius / 2;
+        double vahemaaFaktor = Math.sqrt(vahemaaX * vahemaaX + vahemaaY * vahemaaY);
+        this.setKiirusX(vahemaaX / vahemaaFaktor * kiirus);
+        this.setKiirusY(vahemaaY / vahemaaFaktor * kiirus);
+        this.sihtX = sihtX;
+        this.sihtY = sihtY;
     }
 
     public void render(GraphicsContext gc) {
