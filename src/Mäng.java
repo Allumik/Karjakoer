@@ -76,6 +76,8 @@ public class Mäng extends Application {
             }
         });
 
+        primaryStage.setTitle("Vajuta tühik, et haukuda");
+
         primaryStage.setScene(steen);
 
         new AnimationTimer() {
